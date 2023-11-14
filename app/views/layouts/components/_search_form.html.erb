@@ -1,0 +1,18 @@
+<%= form_with(url: search_products_path, method: :get, local: true) do |form| %>
+  <div class="field is-grouped">
+    <div class="control is-flex is-align-items-center is-space-x-2">
+      <div class="field has-addons">
+        <div class="control is-relative">
+          <%= form.text_field :keywords, class: "input is-rounded is-transitioned is-fullwidth is-border is-p-2 is-hover:border-blue-500", placeholder: 'Search for Products' %>
+          <div class="is-absolute is-inset-y-0 is-left-0 is-flex is-items-center is-pl-2">
+            <i class="fas fa-search is-text-gray-400"></i>
+          </div>
+        </div>
+      </div>
+
+      <%= form.select :category_id, Category.all.collect { |c| [c.name, c.id] }, { include_blank: 'All Categories' }, class: 'select is-border is-p-2' %>
+
+      <%= form.submit "Search", class: "button is-bg-blue-500 is-text-white is-rounded-r-lg is-p-2 is-hover:bg-blue-600 is-focus:outline-none is-focus:ring-2 is-focus:ring-blue-300" %>
+    </div>
+  </div>
+<% end %>

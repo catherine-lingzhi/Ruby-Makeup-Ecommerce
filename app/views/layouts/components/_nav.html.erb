@@ -1,0 +1,22 @@
+<nav class="navbar is-white has-shadow" role="navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a href="<%= products_path %>" class="navbar-item">
+        <img src="/assets/lipstick-svgrepo-com.svg" alt="Pink Lipstick" width="32" height="32">
+        <span class="ml-2 is-size-4 has-text-weight-semibold is-hidden-mobile">Makeup Directory</span>
+      </a>
+      <%= render partial: 'layouts/components/search_form' %>
+      <div class="navbar-burger burger" data-target="navMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div id="navMenu" class="navbar-menu">
+      <div class="navbar-end">
+        <a href="<%= products_path %>" class="navbar-item">Products</a>
+        <a href="<%= categories_path %>" class="navbar-item">Categories</a>
+      </div>
+    </div>
+  </div>
+</nav>
