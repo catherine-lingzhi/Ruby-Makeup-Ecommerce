@@ -1,2 +1,28 @@
-<h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
+<div class="container is-max-desktop mx-auto px-4">
+  <h1 class="title is-2 has-text-centered">Products</h1>
+  <div class="is-flex is-justify-content-flex-end mb-5">
+    <%= paginate @products %><br>
+  </div>
+  <div class="columns is-multiline">
+    <% @products.each do |product| %>
+      <div class="column is-one-third">
+        <div class="card">
+          <% if product.image_link.present? %>
+            <%= link_to product_path(product) do %>
+              <%= image_tag product.image_link, alt: product.name, class: "card-image-top" %>
+            <% end %>
+          <% end %>
+          <div class="card-content">
+            <%= link_to product_path(product) do %>
+              <p class="title is-4"><%= product.name %></p>
+            <% end %>
+            <p class="subtitle is-6 has-text-grey">
+              <%= truncate(product.description, length: 100, separator: ' ') %>
+            </p>
+            <p class="has-text-success has-text-weight-bold mb-2">Price: $<%= product.price %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

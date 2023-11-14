@@ -1,2 +1,22 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<div class="container is-max-desktop px-4">
+  <h1 class="title is-2 has-text-centered">Product Details</h1>
+
+  <div class="columns is-centered">
+    <div class="column is-one-third">
+      <% if @product.image_link.present? %>
+        <%= image_tag @product.image_link, alt: @product.name, class: "image is-64x64" %>
+      <% end %>
+    </div>
+    <div class="column is-one-third">
+      <h2 class="title is-3 has-text-bold mb-2"><%= @product.name %></h2>
+      <p class="mb-2"><strong>Description:</strong> <%= @product.description %></p>
+      <p class="mb-2"><strong>Category:</strong> <%= @product.category.name %></p>
+      <p class="has-text-success mb-2"><strong>Price:</strong> $<%= @product.price %></p>
+      <div class="mt-5">
+        <%= link_to products_path, class: "button is-info" do %>
+          Go Back
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

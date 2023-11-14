@@ -1,2 +1,29 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<h1 class="title is-2 has-text-weight-bold mb-4 has-text-centered"><%= @category.name %></h1>
+<div class="box is-two-thirds is-relative is-overflow-x-auto is-shadow-md is-rounded is-flex is-justify-content-center mx-auto">
+    <table class="table is-fullwidth is-size-7 is-text-left has-text-grey-light-dark">
+        <thead class="is-size-7 has-text-grey-dark has-background-danger-light">
+            <tr>
+                <th class="px-6 py-3">
+                    Image
+                </th>
+                <th class="px-6 py-3">
+                    Product Name
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @category.products.each do |product| %>
+            <tr class="has-background-white-bis has-border-bottom-dark">
+                <th class="px-6 py-4 has-text-weight-medium has-text-grey-darkest">
+                  <%= link_to product_path(product) do %>
+                    <%= image_tag product.image_link %>
+                  <% end %>
+                </th>
+                <td class="px-6 py-4">
+                    <%= product.name %>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>

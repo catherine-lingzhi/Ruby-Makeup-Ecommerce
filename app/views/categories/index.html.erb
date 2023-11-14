@@ -1,2 +1,29 @@
-<h1>Categories#index</h1>
-<p>Find me in app/views/categories/index.html.erb</p>
+<h1 class="title is-2 has-text-weight-bold mb-4 has-text-centered">Categories</h1>
+<div class="box is-two-thirds is-relative is-shadow-md is-rounded is-flex is-justify-content-center mx-auto">
+    <table class="table is-fullwidth is-size-7 is-text-left has-text-grey-light-dark">
+        <thead class="is-size-7 has-text-grey-dark has-background-danger-light">
+            <tr>
+                <th class="px-6 py-3">
+                    Categories
+                </th>
+                <th class="px-6 py-3">
+                    Products in Category
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @categories.each do |category| %>
+            <tr class="has-background-white-bis has-border-bottom-dark">
+                <th class="px-6 py-4 has-text-weight-medium has-text-grey-darkest">
+                  <%= link_to category_path(category), class: "has-text-black" do %>
+                    <%= category.name %>
+                  <% end %>
+                </th>
+                <td class="px-6 py-4">
+                    <%= category.products.count %>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>
