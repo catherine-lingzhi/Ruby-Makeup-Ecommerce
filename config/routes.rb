@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  get 'categories/index'
-  get 'categories/show'
-  get 'products/index'
-  get 'products/show'
-  get 'products/search'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root "products#index"
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :products, only: %i[index show] do
+    collection do
+      get "search", to: "products#search"
+    end
+  end
+
+  resources :categories, only: %i[index show]
 end
