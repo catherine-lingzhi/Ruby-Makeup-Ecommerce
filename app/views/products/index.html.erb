@@ -5,11 +5,11 @@
   </div>
   <div class="columns is-multiline">
     <% @products.each do |product| %>
-      <div class="column is-one-third is-fullheight">
-        <div class="card is-fullheight">
+      <div class="column is-one-third">
+        <div class="card">
           <% if product.image_link.present? %>
             <%= link_to product_path(product) do %>
-              <%= image_tag product.image_link, alt: product.name, class: "card-image-top", style: "height: 200px; object-fit: cover;" %>
+              <%= image_tag product.image_link, alt: product.name, class: "card-image-top" %>
             <% end %>
           <% end %>
           <div class="card-content">
@@ -17,7 +17,7 @@
               <p class="title is-4"><%= product.name %></p>
             <% end %>
             <p class="subtitle is-6 has-text-grey">
-              <%= truncate_words(product.description, length: 40) %>
+              <%= truncate(product.description, length: 100) %>
             </p>
             <p class="has-text-success has-text-weight-bold mb-2">Price: $<%= product.price %></p>
           </div>

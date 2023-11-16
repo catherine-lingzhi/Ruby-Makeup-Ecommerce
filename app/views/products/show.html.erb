@@ -4,14 +4,16 @@
   <div class="columns is-centered">
     <div class="column is-one-third">
       <% if @product.image_link.present? %>
-        <%= image_tag @product.image_link, alt: @product.name, class: "image is-64x64" %>
+        <figure class="image is-256x256">
+          <%= image_tag @product.image_link, alt: @product.name %>
+        </figure>
       <% end %>
     </div>
     <div class="column is-one-third">
-      <h2 class="title is-3 has-text-bold mb-2"><%= @product.name %></h2>
-      <p class="mb-2"><strong>Description:</strong> <%= @product.description %></p>
-      <p class="mb-2"><strong>Category:</strong> <%= @product.category.name %></p>
-      <p class="has-text-success mb-2"><strong>Price:</strong> $<%= @product.price %></p>
+      <h2 class="title is-3 has-text-weight-bold mb-4"><%= @product.name %></h2>
+      <p class="mb-4"><strong>Description:</strong> <%= @product.description %></p>
+      <p class="mb-4"><strong>Category:</strong> <%= @product.category.name %></p>
+      <p class="has-text-success mb-4"><strong>Price:</strong> $<%= @product.price %></p>
       <div class="mt-5">
         <%= link_to products_path, class: "button is-info" do %>
           Go Back
