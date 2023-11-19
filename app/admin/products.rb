@@ -4,7 +4,7 @@ ActiveAdmin.register Product do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :price, :image_link, :description, :category_id, :image
+  permit_params :name, :price, :image_link, :description, :category_id, :image, :on_sale
   #
   # or
   #
@@ -24,6 +24,7 @@ ActiveAdmin.register Product do
       f.input :image, as:   :file,
                       # hint: f.object.image.present? ? image_tag(f.object.image.variant(resize_to_limit: [500, 500])) : ""
                       hint: f.object.image.present? ? image_tag(f.object.image, size: "150x150") : ""
+      f.input :on_sale
     end
     f.actions
   end

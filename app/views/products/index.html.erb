@@ -1,5 +1,11 @@
 <div class="container is-max-desktop mx-auto px-4">
   <h1 class="title is-2 has-text-centered">Products</h1>
+  <div>
+    <%= form_with(url: products_path, method: :get, id: 'filter-form') do %>
+    <%= select_tag(:filter, options_for_select([['All Products', 'all'], ['On Sale', 'on_sale'], ['New Products', 'new'], ['Recently Updated', 'recently_updated']], params[:filter])) %>
+    <%= submit_tag 'Filter' %>
+    <% end %>
+  </div>
   <div class="is-flex is-justify-content-flex-end mb-5">
     <%= paginate @products %><br>
   </div>

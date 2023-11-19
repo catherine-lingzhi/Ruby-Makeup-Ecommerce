@@ -1,6 +1,15 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all.page(params[:page]).per(15)
+    @products = case params[:filter]
+                when "on_sale"
+                  Product.where(on_sale: true)
+                when "new"
+                  Product.where("created_at >= ?", 3.days.ago)
+                when "recently_updated"
+                  Product.where("updated_at >= ?", 3.days.ago)
+                else
+                  Product.all
+                end.page(params[:page]).per(15)
   end
 
   def show
