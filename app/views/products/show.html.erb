@@ -3,9 +3,9 @@
 
   <div class="columns is-centered">
     <div class="column is-one-third">
-      <% if @product.image_link.present? %>
+      <% if @product.image.present? %>
         <figure class="image is-256x256">
-          <%= image_tag @product.image_link, alt: @product.name %>
+          <%= image_tag @product.image, alt: @product.name %>
         </figure>
       <% end %>
     </div>

@@ -7,9 +7,9 @@
     <% @products.each do |product| %>
       <div class="column is-one-third">
         <div class="card">
-          <% if product.image_link.present? %>
+          <% if product.image.attached? %>
             <%= link_to product_path(product) do %>
-              <%= image_tag product.image_link, alt: product.name, class: "card-image-top" %>
+              <%= image_tag url_for(product.image), alt: product.name, class: "card-image-top" %>
             <% end %>
           <% end %>
           <div class="card-content">

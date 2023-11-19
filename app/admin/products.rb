@@ -4,7 +4,7 @@ ActiveAdmin.register Product do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :price, :image_link, :description, :category_id
+  permit_params :name, :price, :image_link, :description, :category_id, :image
   #
   # or
   #
@@ -13,4 +13,19 @@ ActiveAdmin.register Product do
   #   permitted << :other if params[:action] == "create" && current_user.admin?
   #   permitted
   # end
+  form do |f|
+    f.inputs "Product Details" do
+      f.input :category_id, as: :select, collection: Category.all.map { |c|
+        [c.name, c.id]
+      }, include_blank: false
+      f.input :name
+      f.input :price
+      f.input :image_link
+      f.input :description
+      f.input :image, as:   :file,
+                      # hint: f.object.image.present? ? image_tag(f.object.image.variant(resize_to_limit: [500, 500])) : ""
+                      hint: f.object.image.present? ? image_tag(f.object.image, size: "150x150") : ""
+    end
+    f.actions
+  end
 end

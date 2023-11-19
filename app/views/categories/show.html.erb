@@ -16,7 +16,7 @@
             <tr class="has-background-white-bis has-border-bottom-dark">
                 <th class="px-6 py-4 has-text-weight-medium has-text-grey-darkest">
                   <%= link_to product_path(product) do %>
-                    <%= image_tag product.image_link %>
+                    <%= image_tag url_for(product.image) %>
                   <% end %>
                 </th>
                 <td class="px-6 py-4">
