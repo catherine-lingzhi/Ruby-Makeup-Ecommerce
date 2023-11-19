@@ -20,7 +20,6 @@ ActiveAdmin.register Product do
       }, include_blank: false
       f.input :name
       f.input :price
-      f.input :image_link
       f.input :description
       f.input :image, as:   :file,
                       # hint: f.object.image.present? ? image_tag(f.object.image.variant(resize_to_limit: [500, 500])) : ""

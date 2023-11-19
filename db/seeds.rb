@@ -30,7 +30,7 @@ data = JSON.parse(response)
 
 # Counter to limit the number of products
 products_created = 0
-desired_product_limit = 200
+desired_product_limit = 300
 
 data.each do |product_data|
   break if products_created >= desired_product_limit
@@ -64,7 +64,7 @@ end
 puts "Created #{Category.count} categories"
 puts "Created #{Product.count} products"
 
-# if Rails.env.development?
-#   AdminUser.create!(email: "admin@example.com", password: "password",
-#                     password_confirmation: "password")
-# end
+if Rails.env.development?
+  AdminUser.create!(email: "admin@example.com", password: "password",
+                    password_confirmation: "password")
+end
