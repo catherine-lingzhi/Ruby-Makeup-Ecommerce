@@ -15,7 +15,7 @@
       <p class="mb-4"><strong>Category:</strong> <%= @product.category.name %></p>
       <p class="has-text-success mb-4"><strong>Price:</strong> $<%= @product.price %></p>
       <div class="mt-5">
-        <%= link_to products_path, class: "button is-info" do %>
+        <%= link_to(request.referer || products_path, class: "button is-info") do %>
           Go Back
         <% end %>
       </div>
