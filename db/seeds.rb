@@ -6,6 +6,7 @@ require "open-uri"
 
 Product.delete_all
 Category.delete_all
+AdminUser.delete_all
 
 # Helper function to validate image link
 def valid_image_link?(image_link)

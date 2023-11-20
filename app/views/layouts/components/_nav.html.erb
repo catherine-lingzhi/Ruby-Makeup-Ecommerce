@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" >
-      <img src="https://unsplash.com/photos/blue-and-brown-makeup-brush-set-yd3mg93Smn8" width="112" height="28">
+    <a href="#">
+      <img src="/logo.png" width="180" height="180">
     </a>
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -12,12 +12,12 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a href="<%= products_path %>"class="navbar-item">
+      <a href="<%= products_path %>" class="navbar-item">
         Product
       </a>
 
       <a href="<%= categories_path %>" class="navbar-item">
-       Category
+        Category
       </a>
 
       <div class="navbar-item has-dropdown is-hoverable">
@@ -26,7 +26,7 @@
         </a>
 
         <div class="navbar-dropdown">
-          <a  class="navbar-item">
+          <a class="navbar-item">
             About
           </a>
           <a class="navbar-item">
@@ -40,10 +40,21 @@
       </div>
     </div>
 
+    <div class="navbar-item">
+      <div class="buttons">
+        <%= render partial: 'layouts/components/search_form' %>
+      </div>
+    </div>
+
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-           <%= render partial: 'layouts/components/search_form' %>
+          <a class="button is-primary is-rectangle">
+            <strong>Sign up</strong>
+          </a>
+          <a class="button is-primary is-light is-rectangle">
+            Log in
+          </a>
         </div>
       </div>
     </div>
