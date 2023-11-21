@@ -49,12 +49,12 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary is-rectangle">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-primary is-light is-rectangle">
-            Log in
-          </a>
+         <% if user_signed_in? %>
+          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'button is-danger' %>
+        <% else %>
+          <%= button_to 'Sign Up', new_user_registration_path, method: :get, class: 'button is-success' %>
+          <%= button_to 'Login', new_user_session_path, method: :get, class: 'button is-info' %>
+        <% end %>
         </div>
       </div>
     </div>
