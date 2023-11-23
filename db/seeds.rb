@@ -107,7 +107,13 @@ Province.create!([{
 },
 {
   name: 'Quebec',
-
+  GST: 0.05,
+  QST: 0.0975
+},
+{
+  name: 'Saskatchewan',
+  GST: 0.05,
+  PST: 0.06
 }])
 
 puts "Created #{Category.count} categories"

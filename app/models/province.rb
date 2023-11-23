@@ -1,0 +1,3 @@
+class Province < ApplicationRecord
+
+end
