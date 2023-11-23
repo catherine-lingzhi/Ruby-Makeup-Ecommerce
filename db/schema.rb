@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_22_211406) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_23_180054) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -88,6 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_211406) do
     t.datetime "updated_at", null: false
     t.integer "order_id", null: false
     t.integer "product_id", null: false
+    t.decimal "tax"
     t.index ["order_id"], name: "index_order_details_on_order_id"
     t.index ["product_id"], name: "index_order_details_on_product_id"
   end
@@ -112,6 +113,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_211406) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "province_id", null: false
+    t.index ["province_id"], name: "index_profiles_on_province_id"
+  end
+
   create_table "provinces", force: :cascade do |t|
     t.string "name"
     t.decimal "GST"
@@ -129,12 +140,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_211406) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.string "address"
-    t.integer "province_id", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["province_id"], name: "index_users_on_province_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -146,5 +152,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_211406) do
   add_foreign_key "order_details", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
-  add_foreign_key "users", "provinces"
+  add_foreign_key "profiles", "provinces"
 end
