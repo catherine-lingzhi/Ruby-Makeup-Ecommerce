@@ -7,6 +7,7 @@ require "open-uri"
 Product.delete_all
 Category.delete_all
 AdminUser.delete_all
+Province.delete_all
 
 # Helper function to validate image link
 def valid_image_link?(image_link)
@@ -61,6 +62,59 @@ data.each do |product_data|
     puts "Invalid category #{product_data['product_type']}"
   end
 end
+
+Province.create!([{
+  name: 'Alberta',
+  GST: 0.05
+},
+{
+  name: 'British Columbia',
+  GST: 0.05,
+  PST: 0.07
+},
+{
+  name: 'Manitoba',
+  GST: 0.05,
+  PST: 0.07
+},
+{
+  name: 'New Brunswick',
+  HST: 0.15
+},
+{
+  name: 'Newfoundland and Labrador',
+  HST: 0.15
+},
+{
+  name: 'Northwest Territories',
+  GST: 0.05
+},
+{
+  name: 'Nova Scotia',
+  HST: 0.15
+},
+{
+  name: 'Nunavut',
+  GST: 0.05
+},
+{
+  name: 'Ontario',
+  HST: 0.13
+},
+{
+  name: 'Prince Edward Island',
+  HST: 0.15
+},
+{
+  name: 'Quebec',
+  GST: 0.05,
+  QST: 0.0975
+},
+{
+  name: 'Saskatchewan',
+  GST: 0.05,
+  PST: 0.06
+}])
 
 puts "Created #{Category.count} categories"
 puts "Created #{Product.count} products"

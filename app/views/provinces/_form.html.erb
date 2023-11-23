@@ -1,0 +1,17 @@
+<%= form_with(model: province) do |form| %>
+  <% if province.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(province.errors.count, "error") %> prohibited this province from being saved:</h2>
+
+      <ul>
+        <% province.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

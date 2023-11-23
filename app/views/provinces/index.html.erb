@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Provinces</h1>
+
+<div id="provinces">
+  <% @provinces.each do |province| %>
+    <%= render province %>
+    <p>
+      <%= link_to "Show this province", province %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New province", new_province_path %>
