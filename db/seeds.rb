@@ -64,57 +64,57 @@ data.each do |product_data|
 end
 
 Province.create!([{
-  name: 'Alberta',
-  GST: 0.05
-},
-{
-  name: 'British Columbia',
-  GST: 0.05,
-  PST: 0.07
-},
-{
-  name: 'Manitoba',
-  GST: 0.05,
-  PST: 0.07
-},
-{
-  name: 'New Brunswick',
-  HST: 0.15
-},
-{
-  name: 'Newfoundland and Labrador',
-  HST: 0.15
-},
-{
-  name: 'Northwest Territories',
-  GST: 0.05
-},
-{
-  name: 'Nova Scotia',
-  HST: 0.15
-},
-{
-  name: 'Nunavut',
-  GST: 0.05
-},
-{
-  name: 'Ontario',
-  HST: 0.13
-},
-{
-  name: 'Prince Edward Island',
-  HST: 0.15
-},
-{
-  name: 'Quebec',
-  GST: 0.05,
-  QST: 0.0975
-},
-{
-  name: 'Saskatchewan',
-  GST: 0.05,
-  PST: 0.06
-}])
+                   name: "Alberta",
+                   GST:  0.05
+                 },
+                  {
+                    name: "British Columbia",
+                    GST:  0.05,
+                    PST:  0.07
+                  },
+                  {
+                    name: "Manitoba",
+                    GST:  0.05,
+                    PST:  0.07
+                  },
+                  {
+                    name: "New Brunswick",
+                    HST:  0.15
+                  },
+                  {
+                    name: "Newfoundland and Labrador",
+                    HST:  0.15
+                  },
+                  {
+                    name: "Northwest Territories",
+                    GST:  0.05
+                  },
+                  {
+                    name: "Nova Scotia",
+                    HST:  0.15
+                  },
+                  {
+                    name: "Nunavut",
+                    GST:  0.05
+                  },
+                  {
+                    name: "Ontario",
+                    HST:  0.13
+                  },
+                  {
+                    name: "Prince Edward Island",
+                    HST:  0.15
+                  },
+                  {
+                    name: "Quebec",
+                    GST:  0.05,
+                    QST:  0.0975
+                  },
+                  {
+                    name: "Saskatchewan",
+                    GST:  0.05,
+                    PST:  0.06
+                  }])
 
 puts "Created #{Category.count} categories"
 puts "Created #{Product.count} products"
