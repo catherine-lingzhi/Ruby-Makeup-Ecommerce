@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
 
   def cart
     # lookup a product based upon a series of ids
-    Product.find(session[:shopping_cart])
+    Product.where(id: session[:shopping_cart])
   end
 end
