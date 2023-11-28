@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
                 when "new"
                   Product.where("created_at >= ?", 3.days.ago)
                 when "recently_updated"
-                  Product.where("updated_at >= ?", 3.days.ago)
+                  Product.where("updated_at >= ? AND created_at < ?", 3.days.ago, 3.days.ago)
                 else
                   Product.all
                 end.page(params[:page]).per(15)
