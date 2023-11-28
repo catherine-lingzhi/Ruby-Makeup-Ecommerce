@@ -27,6 +27,21 @@
             </p>
             <p class="has-text-success has-text-weight-bold mb-2">Price: $<%= product.price %></p>
           </div>
+            <div class="buttons is-centered">
+              <% if cart.include?(product) %>
+                <%= button_to cart_path(product), method: :delete, class: 'button is-danger' do %>
+                  Remove from Cart
+                <% end %>
+              <% else %>
+               <%= form_with(url: cart_index_path, method: :post) do %>
+                <%= hidden_field_tag(:id, product.id) %>
+                <%= label_tag(:quantity, 'Quantity:') %>
+                <%= number_field_tag(:quantity, 1, min: 1) %>
+                <%= button_tag 'Add to Cart', class: 'button is-primary' %>
+              <% end %>
+
+              <% end %>
+            </div>
         </div>
       </div>
     <% end %>

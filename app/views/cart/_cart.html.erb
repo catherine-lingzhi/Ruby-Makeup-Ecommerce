@@ -1,0 +1,56 @@
+<main class="section">
+  <div class="container">
+    <h1 class="title is-2">Shopping Cart</h1>
+    <% if cart.present? %>
+      <div class="columns is-multiline">
+        <% cart.each do |product| %>
+          <div class="column is-full">
+            <div class="box">
+              <div class="columns is-vcentered">
+                <div class="column is-one-quarter">
+                  <%= image_tag url_for(product.image), alt: product.name, class: "image is-128x128 mb-3" %>
+                </div>
+                <div class="column is-three-quarters">
+                  <p class="title is-5"><%= product.name %></p>
+                  <p class="subtitle is-6 has-text-grey"><%= truncate(product.description, length: 30) %></p>
+                  <div class="level">
+                    <div class="level-left">
+                      <div class="level-item">
+                        <p class="has-text-success has-text-weight-bold">$<%= product.price %></p>
+                      </div>
+                    </div>
+                    <div class="level-right">
+                      <div class="level-item">
+                        <%= link_to 'Remove', cart_path(product), 'data-turbo-method': :delete, class: 'button is-danger is-small' %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="columns">
+        <div class="column is-full">
+          <div class="box">
+            <div class="level">
+              <div class="level-left">
+                <div class="level-item">
+                  <p class="has-text-weight-bold">Subtotal:</p>
+                </div>
+              </div>
+              <div class="level-right">
+                <div class="level-item">
+                  <p class="has-text-success has-text-weight-bold"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <p class="subtitle is-6">Your cart is empty.</p>
+    <% end %>
+  </div>
+</main>
