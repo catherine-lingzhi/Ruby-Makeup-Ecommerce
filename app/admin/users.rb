@@ -14,4 +14,16 @@ ActiveAdmin.register User do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  ActiveAdmin.register User do
+    form do |f|
+      f.inputs "User Details" do
+        f.input :first_name
+        f.input :last_name
+        f.input :address
+        f.input :province_id, as: :select, collection: Province.all.map { |p| [p.name, p.id] }
+        f.input :email
+      end
+      f.actions
+    end
+  end
 end
