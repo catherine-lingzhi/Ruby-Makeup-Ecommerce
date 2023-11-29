@@ -38,8 +38,13 @@ class CartController < ApplicationController
     redirect_to root_path
   end
 
+  def calculate_subtotal(cart)
+    cart.sum { |item| item["product"].price * item["quantity"] }
+  end
+
   def show
     # Assign the shopping cart contents to an instance variable
-    @cart
+    @cart = cart
+    @subtotal = calculate_subtotal(@cart)
   end
 end
