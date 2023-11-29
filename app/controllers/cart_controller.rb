@@ -1,13 +1,27 @@
 class CartController < ApplicationController
   # POST /cart
   def create
-    # log product id to the terminal logger
-    logger.debug("Adding #{params[:id]} to  cart")
+    logger.debug("Adding #{params[:id]} to cart with quantity #{params[:quantity]}")
+
     id = params[:id].to_i
-    # pushed id onto the end of array
-    session[:shopping_cart] << id unless session[:shopping_cart].include?(id)
-    product = Product.find(id)
-    flash[:notice] = "+ #{product.name} added to cart..."
+    quantity = params[:quantity].to_i
+    quantity = 1 if quantity <= 0
+
+    product = Product.find_by(id:)
+
+    # Check if the product is already in the cart
+    existing_item = session[:shopping_cart].find { |item| item["id"] == id }
+
+    if existing_item
+      # Product is already in the cart, update the quantity
+      existing_item["quantity"] += quantity
+    else
+      # Product is not in the cart, add it with the specified quantity
+      session[:shopping_cart] << { "id"       => id,
+                                   "quantity" => quantity }
+    end
+
+    flash[:notice] = "+ #{quantity} #{product.name}(s) added to cart..."
     redirect_to root_path
   end
 
@@ -15,8 +29,17 @@ class CartController < ApplicationController
   def destroy
     logger.debug("removing #{params[:id]} from cart.")
     id = params[:id].to_i
-    session[:shopping_cart].delete(id)
+
+    if (index = session[:shopping_cart].find_index { |item| item["id"] == id })
+      session[:shopping_cart].delete_at(index)
+    end
+
     # TODO: - Add notification ...
     redirect_to root_path
+  end
+
+  def show
+    # Assign the shopping cart contents to an instance variable
+    @cart
   end
 end

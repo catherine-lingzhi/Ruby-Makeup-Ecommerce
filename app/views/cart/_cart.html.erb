@@ -3,25 +3,38 @@
     <h1 class="title is-2">Shopping Cart</h1>
     <% if cart.present? %>
       <div class="columns is-multiline">
-        <% cart.each do |product| %>
+        <% cart.each do |item| %>
           <div class="column is-full">
             <div class="box">
               <div class="columns is-vcentered">
                 <div class="column is-one-quarter">
-                  <%= image_tag url_for(product.image), alt: product.name, class: "image is-128x128 mb-3" %>
+                    <% if item["product"].image.attached? %>
+                      <%= image_tag rails_blob_path(item["product"].image, only_path: true), alt: item["product"].name, class: "image is-128x128 mb-3" %>
+                      <% else %>
+                        <p>No Image</p>
+                    <% end %>
                 </div>
                 <div class="column is-three-quarters">
-                  <p class="title is-5"><%= product.name %></p>
-                  <p class="subtitle is-6 has-text-grey"><%= truncate(product.description, length: 30) %></p>
+                  <p class="title is-5"><%= item["product"].name %></p>
+                  <p class="subtitle is-6 has-text-grey"><%= truncate(item["product"].description, length: 30) %></p>
                   <div class="level">
                     <div class="level-left">
                       <div class="level-item">
-                        <p class="has-text-success has-text-weight-bold">$<%= product.price %></p>
+                        <p class="has-text-success has-text-weight-bold">$<%= item["product"].price %></p>
+
                       </div>
+                    </div>
+                    <div>
+                     <%= form_with(url: cart_index_path, method: :post) do |form| %>
+                      <%= form.hidden_field :product_id, value: item["product"].id %>
+                      <%= form.label :quantity, "Quantity:" %>
+                      <%= form.number_field :quantity, value: item["quantity"] %>
+                      <%= form.submit "Update Quantity" %>
+                    <% end %>
                     </div>
                     <div class="level-right">
                       <div class="level-item">
-                        <%= link_to 'Remove', cart_path(product), 'data-turbo-method': :delete, class: 'button is-danger is-small' %>
+                        <%= link_to 'Remove', cart_path(item["product"]), 'data-turbo-method': :delete, class: 'button is-danger is-small' %>
                       </div>
                     </div>
                   </div>

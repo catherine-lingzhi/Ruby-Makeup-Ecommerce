@@ -1,1 +1,25 @@
-<%= render partial: 'cart/cart' %>
+<h1>Your Shopping Cart</h1>
+
+<% if cart.empty? %>
+  <p>Your shopping cart is empty.</p>
+<% else %>
+  <ul>
+    <% cart.each do |item| %>
+      <li>
+        <div>
+          <% if item["product"].image.attached? %>
+              <%= image_tag rails_blob_path(item["product"].image, only_path: true), alt: item["product"].name, class: "image is-128x128 mb-3" %>
+            <% else %>
+              <!-- Add a placeholder image or handle the case where the image is not attached -->
+              <p>No Image</p>
+            <% end %>
+          <p>Product ID: <%= item["product"].id %></p>
+          <p>Name: <%= item["product"].name %></p>
+          <p>Price: <%= item["product"].price %></p>
+          <!-- Add more attributes as needed -->
+          <p>Quantity: <%= item["quantity"] %></p>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
