@@ -51,6 +51,19 @@
 
             <div class="field is-horizontal">
               <div class="field-label is-normal">
+                <%= f.label :province_id, class: "label" %>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <%= f.collection_select(:province_id, Province.all, :id, :name, prompt: "Select Province", class: "select is-fullwidth") %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
                 <%= f.label :email, class: "label" %>
               </div>
               <div class="field-body">
