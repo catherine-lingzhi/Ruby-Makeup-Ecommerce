@@ -41,6 +41,5 @@ class CartController < ApplicationController
   def show
     # Assign the shopping cart contents to an instance variable
     @cart = cart
-    @subtotal = calculate_subtotal(@cart)
   end
 end

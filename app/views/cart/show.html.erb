@@ -1,25 +1,33 @@
-<h1>Your Shopping Cart</h1>
-
-<% if cart.empty? %>
-  <p>Your shopping cart is empty.</p>
-<% else %>
-  <ul>
-    <% cart.each do |item| %>
-      <li>
-        <div>
-          <% if item["product"].image.attached? %>
-              <%= image_tag rails_blob_path(item["product"].image, only_path: true), alt: item["product"].name, class: "image is-128x128 mb-3" %>
-            <% else %>
-              <!-- Add a placeholder image or handle the case where the image is not attached -->
-              <p>No Image</p>
+<main class="section">
+  <div class="container">
+    <h1 class="title is-2">Shopping Cart</h1>
+    <% if cart.present? %>
+      <% cart.each do |key, value| %>
+        <% if key == "cart_items" %>
+          <div class="columns is-multiline">
+            <% value.each do |item| %>
+              <div class="column is-full">
+                <div class="box">
+                  <p>Product: <%= item["product"].name %></p>
+                  <p>Quantity: <%= item["quantity"] %></p>
+                  <p>price: <%= item["product"].price %></p>
+                  <p>Subtotal: <%= number_to_currency(item["subtotal"]) %></p>
+                </div>
+              </div>
             <% end %>
-          <p>Product ID: <%= item["product"].id %></p>
-          <p>Name: <%= item["product"].name %></p>
-          <p>Price: <%= item["product"].price %></p>
-          <!-- Add more attributes as needed -->
-          <p>Quantity: <%= item["quantity"] %></p>
-        </div>
-      </li>
+          </div>
+        <% elsif key == "total_price" %>
+          <div class="columns">
+            <div class="column is-full">
+              <div class="box">
+                <p>Total Price: <%= number_to_currency(value) %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p class="subtitle is-6">Your cart is empty.</p>
     <% end %>
-  </ul>
-<% end %>
+  </div>
+</main>
