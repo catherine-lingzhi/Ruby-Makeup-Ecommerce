@@ -23,18 +23,12 @@ class ApplicationController < ActionController::Base
         total_price += subtotal
         cart_items << { "product" => product, "quantity" => quantity, "subtotal" => subtotal }
       else
-        # Handle the case where the product is not found
-        # You might want to log an error or take appropriate action
         Rails.logger.error("Product with ID #{item['id']} not found.")
       end
     end
 
     { "cart_items" => cart_items, "total_price" => total_price }
   end
-
-  # def calculate_subtotal(cart)
-  #   cart.sum { |item| item["product"].price * item["quantity"] }
-  # end
 
   def update_allowed_parameters
     devise_parameter_sanitizer.permit(:sign_up) do |u|
