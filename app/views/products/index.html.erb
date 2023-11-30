@@ -27,29 +27,7 @@
             </p>
             <p class="has-text-success has-text-weight-bold mb-2">Price: $<%= product.price %></p>
           </div>
-          <div class="field is-horizontal mb-10">
-            <%= form_with(url: cart_index_path, method: :post) do |form| %>
-              <div class="field-body">
-                <div class="field">
-                  <div class="control">
-                    <%= form.hidden_field(:id, value: product.id) %>
-                  </div>
-                </div>
-                <div class="field">
-
-                  <div class="control">
-                    <%= form.number_field(:quantity, value: 1, min: 1, class: 'input') %>
-                  </div>
-                </div>
-                <div class="field">
-                  <div class="control">
-                    <%= form.button('Add 🛒', type: 'submit', class: 'button is-primary') %>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-
+          <%= render partial: 'add_cart', locals: { id: product.id } %>
         </div>
       </div>
     <% end %>

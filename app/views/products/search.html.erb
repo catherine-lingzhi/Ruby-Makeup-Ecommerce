@@ -27,6 +27,7 @@
               <%= truncate(product.description, length: 100, separator: ' ') %>
             </p>
             <p class="has-text-success has-text-weight-bold mb-2">Price: $<%= product.price %></p>
+             <%= render partial: 'add_cart', locals: { id: product.id } %>
           </div>
         </div>
       </div>

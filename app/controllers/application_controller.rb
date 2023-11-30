@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
     cart_items
   end
 
+  def calculate_subtotal(cart)
+    cart.sum { |item| item["product"].price * item["quantity"] }
+  end
+
   def update_allowed_parameters
     devise_parameter_sanitizer.permit(:sign_up) do |u|
       u.permit(:first_name, :last_name, :address, :province_id, :email, :password)

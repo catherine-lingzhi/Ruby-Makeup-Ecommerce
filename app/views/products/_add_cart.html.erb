@@ -1,14 +1,22 @@
- <div class="buttons is-centered">
-    <% if cart.include?(product) %>
-      <%= button_to cart_path(product), method: :delete, class: 'button is-danger' do %>
-        Remove from Cart
-      <% end %>
-    <% else %>
-      <%= form_with(url: cart_index_path, method: :post) do %>
-        <%= hidden_field_tag(:id, product.id) %>
-        <%= label_tag(:quantity, 'Quantity:') %>
-        <%= number_field_tag(:quantity, 1, min: 1) %>
-        <%= button_tag 'Add to Cart', class: 'button is-primary' %>
-      <% end %>
-    <% end %>
-</div>
+  <div class="field is-horizontal mb-10">
+            <%= form_with(url: cart_index_path, method: :post) do |form| %>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <%= form.hidden_field(:id, value: id) %>
+                  </div>
+                </div>
+                <div class="field">
+
+                  <div class="control">
+                    <%= form.number_field(:quantity, value: 1, min: 1, class: 'input') %>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="control">
+                    <%= form.button('Add 🛒', type: 'submit', class: 'button is-primary') %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
