@@ -38,6 +38,19 @@ class CartController < ApplicationController
     redirect_to root_path
   end
 
+  # POST /cart/:id/update_quantity
+  def update_quantity
+    id = params[:id].to_i
+    quantity = params[:quantity].to_i
+
+    existing_item = session[:shopping_cart].find { |item| item["id"] == id }
+
+    return unless existing_item
+
+    # Product is already in the cart, update the quantity
+    existing_item["quantity"] = quantity
+  end
+
   def show
     # Assign the shopping cart contents to an instance variable
     @cart = cart
