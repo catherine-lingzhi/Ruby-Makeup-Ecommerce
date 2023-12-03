@@ -2,53 +2,75 @@
   <div class="container">
     <h1 class="title is-2">Shopping Cart</h1>
     <% if cart.present? %>
-      <div class="columns is-multiline">
-        <% cart.each do |product| %>
-          <div class="column is-full">
-            <div class="box">
-              <div class="columns is-vcentered">
-                <div class="column is-one-quarter">
-                  <%= image_tag url_for(product.image), alt: product.name, class: "image is-128x128 mb-3" %>
-                </div>
-                <div class="column is-three-quarters">
-                  <p class="title is-5"><%= product.name %></p>
-                  <p class="subtitle is-6 has-text-grey"><%= truncate(product.description, length: 30) %></p>
-                  <div class="level">
-                    <div class="level-left">
-                      <div class="level-item">
-                        <p class="has-text-success has-text-weight-bold">$<%= product.price %></p>
-                      </div>
+     <% cart.each do |key, value| %>
+       <% if key == "cart_items" %>
+        <div class="columns is-multiline">
+            <% value.each do |item| %>
+              <div class="column is-full">
+                <div class="box">
+                  <div class="columns ">
+                    <div class="column ">
+                        <% if item["product"].image.attached? %>
+                          <%= image_tag rails_blob_path(item["product"].image, only_path: true), alt: item["product"].name, class: "image is-128x128 mb-3" %>
+                          <% else %>
+                            <p>No Image</p>
+                        <% end %>
                     </div>
-                    <div class="level-right">
-                      <div class="level-item">
-                        <%= link_to 'Remove', cart_path(product), 'data-turbo-method': :delete, class: 'button is-danger is-small' %>
-                      </div>
+                    <div class="column ">
+                      <p class="title is-5"><%= item["product"].name %></p>
+                      <p class="mt-1 subtitle is-6 has-text-grey"><%= truncate(item["product"].description, length: 100) %></p>
+                    </div>
+                    <div class="column">
+                    <p class="title is-5">Quantity</p>
+                    <div class="field is-horizontal mb-10">
+                      <%= form_with(url: update_quantity_cart_path(item["product"].id), method: :post) do |form| %>
+                        <div class="field-body">
+                          <div class="field">
+                            <div class="control">
+                              <%= form.hidden_field(:id, value: item["product"].id) %>
+                            </div>
+                          </div>
+                          <div class="field">
+                            <div class="control">
+                              <%= form.number_field(:quantity, value: item["quantity"], min: 1, class: 'input') %>
+                              <%= form.button("update", type: 'submit', class: 'button is-primary') %>
+                            </div>
+                          </div>
+                          <div class="field">
+                      <div class="control">
+                  </div>
+                </div>
+              </div>
+            <% end %></div>
+                      <%# <p class="mt-3 ml-5 subtitle is-6 has-text-grey"><%= item["quantity"] %>
+                    </div>
+                    <div class="column">
+                      <p class="title is-5">Price</p>
+                      <p class="has-text-success has-text-weight-bold">$<%= item["product"].price %></p>
+                    </div>
+                       <div class="column">
+                      <p class="title is-5">Subtotal</p>
+                      <p class="has-text-success has-text-weight-bold">$<%= item["subtotal"] %></p>
+                    </div>
+                    <div class="column mt-6">
+                      <%= link_to 'Remove', cart_path(item["product"]), 'data-turbo-method': :delete, class: 'button is-danger is-small' %>
                     </div>
                   </div>
                 </div>
               </div>
+            <% end %>
+        </div>
+        <% elsif key == "total_price" %>
+          <div class="columns box">
+            <div class="column">
+                <p>Total Price: <%= number_to_currency(value) %></p>
+            </div>
+            <div class="column mx-100">
+                <%= link_to 'Make an Order',  class: 'button is-danger is-small' %>
             </div>
           </div>
         <% end %>
-      </div>
-      <div class="columns">
-        <div class="column is-full">
-          <div class="box">
-            <div class="level">
-              <div class="level-left">
-                <div class="level-item">
-                  <p class="has-text-weight-bold">Subtotal:</p>
-                </div>
-              </div>
-              <div class="level-right">
-                <div class="level-item">
-                  <p class="has-text-success has-text-weight-bold"></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <% end %>
     <% else %>
       <p class="subtitle is-6">Your cart is empty.</p>
     <% end %>
