@@ -19,7 +19,11 @@
       <a href="<%= categories_path %>" class="navbar-item">
         Category
       </a>
-
+    <a href="<%= cart_path(current_user.id) %>" class="navbar-item">
+        Cart
+          <a href="<%= orders_path %>" class="navbar-item">
+        Orders
+      </a>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
@@ -51,8 +55,8 @@
       <div class="navbar-item">
         <div class="buttons">
          <% if user_signed_in? %>
-         <p>Welcome, <%= current_user.email %></p>
-          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'button is-danger' %>
+         <p>Hi, <%= current_user.email.split('@').first %>!</p>
+          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'ml-5 button is-danger' %>
 
         <% else %>
           <%= button_to 'Sign Up', new_user_registration_path, method: :get, class: 'button is-success' %>

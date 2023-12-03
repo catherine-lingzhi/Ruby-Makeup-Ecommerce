@@ -1,0 +1,32 @@
+
+  <div class="container">
+    <h1 class="title is-2">Order Details</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Status</th>
+          <th>Subtotal</th>
+          <th>User Email</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td><%= order.order_status %></td>
+            <td><%= number_to_currency(order.subtotal) %></td>
+            <td><%= order.user.email %></td> <!-- Assuming there's a user association -->
+            <td>
+              <%= link_to 'Show', order%>
+              <%= link_to 'Delete', order_path(order.id), 'data-turbo-method': :delete%>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+
+
+

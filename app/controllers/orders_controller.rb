@@ -1,9 +1,17 @@
 # app/controllers/orders_controller.rb
 class OrdersController < ApplicationController
+  def index
+    @orders = current_user.orders.all
+  end
+
+  def show
+    @order = Order.find(params[:id])
+  end
+
   def create
-    @order = Order.create(order_status: 0, subtotal: 0, user_id: current_user.id)
+    @orders = Order.create(order_status: 0, subtotal: 0, user_id: current_user.id)
     total_price = 0
-    if @order.save
+    if @orders.save
       Rails.logger.debug("Order saved successfully: #{@order.inspect}")
 
       gst = current_user.province&.GST || 0
@@ -17,24 +25,25 @@ class OrdersController < ApplicationController
         quantity = item["quantity"]
         subtotal = product.price * quantity
         total_price += subtotal
-        @order.order_details.create(
+        @orders.order_details.create(
           quantity:,
           price:      product.price,
           product_id: product.id,
           tax:
         )
       end
+      @orders.update(subtotal: total_price)
       session[:shopping_cart] = nil
-      # Redirect or perform other actions as needed
+      redirect_to orders_path(@order), notice: "Order was successfully created."
     else
       # Handle errors
     end
-    @order.update(subtotal: total_price)
   end
 
-  private
+  def destroy
+    @order = Order.find(params[:id])
+    @order.destroy
 
-  def calculate_tax(price)
-    # Implement your tax calculation logic here
+    redirect_to orders_path, notice: "Order was successfully destroyed."
   end
 end
