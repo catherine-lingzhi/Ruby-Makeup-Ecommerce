@@ -6,6 +6,12 @@ class OrdersController < ApplicationController
     if @order.save
       Rails.logger.debug("Order saved successfully: #{@order.inspect}")
 
+      gst = current_user.province&.GST || 0
+      pst = current_user.province&.PST || 0
+      hst = current_user.province&.HST || 0
+      qst = current_user.province&.QST || 0
+      tax = gst + pst + hst + qst
+
       session[:shopping_cart].each do |item|
         product = Product.find_by(id: item["id"])
         quantity = item["quantity"]
@@ -15,7 +21,7 @@ class OrdersController < ApplicationController
           quantity:,
           price:      product.price,
           product_id: product.id,
-          tax:        0.13
+          tax:
         )
       end
       session[:shopping_cart] = nil
