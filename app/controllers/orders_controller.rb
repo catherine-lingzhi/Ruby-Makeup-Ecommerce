@@ -29,12 +29,13 @@ class OrdersController < ApplicationController
           quantity:,
           price:      product.price,
           product_id: product.id,
-          tax:
+          tax:        product.price * (gst + pst + hst)
         )
       end
       @orders.update(subtotal: total_price)
       session[:shopping_cart] = nil
-      redirect_to orders_path(@order), notice: "Order was successfully created."
+
+      redirect_to orders_path(@orders.id), notice: "Order was successfully created."
     else
       # Handle errors
     end

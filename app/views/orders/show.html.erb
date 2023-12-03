@@ -1,4 +1,4 @@
-<main class="section">
+
   <div class="container">
     <h1 class="title is-2">Order Details</h1>
     <% if @order.present? %>
@@ -28,9 +28,28 @@
         </div>
       <% end %>
       <div class="columns">
-        <div class="column">
-          <p>Total Price: <%= number_to_currency(@order.subtotal) %></p>
+              <div class="column">
+          <p>Status: <%= @order. order_status%></p>
         </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <p>Subtotal: <%= number_to_currency(@order.subtotal) %></p>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+         <p></p><strong>GST:</strong> <%= @order.gst %></p>
+          <p><strong>PST:</strong> <%= @order.pst %></p>
+          <p><strong>HST:</strong> <%= @order.hst %></p>
+        </div>
+      </div>
+            <div class="columns">
+        <div class="column">
+          <p>Total: <%= number_to_currency((@order.subtotal) * (1 + @order.gst + @order.pst + @order.hst)) %></p>
+        </div>
+      </div>
+      <div class="columns">
         <div class="column">
           <%= link_to 'Back to Orders', orders_path %>
         </div>
@@ -43,4 +62,4 @@
       <p class="subtitle is-6">Order not found.</p>
     <% end %>
   </div>
-</main>
+

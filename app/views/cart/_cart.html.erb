@@ -1,7 +1,7 @@
-<main class="section">
+
   <div class="container">
     <h1 class="title is-2">Shopping Cart</h1>
-    <% if cart.present? %>
+    <% if !cart.empty? %>
      <% cart.each do |key, value| %>
        <% if key == "cart_items" %>
         <div class="columns is-multiline">
@@ -74,4 +74,4 @@
       <p class="subtitle is-6">Your cart is empty.</p>
     <% end %>
   </div>
-</main>
+

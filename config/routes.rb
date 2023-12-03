@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'checkout/cancel'
+  get 'checkout/success'
   resources :provinces
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config

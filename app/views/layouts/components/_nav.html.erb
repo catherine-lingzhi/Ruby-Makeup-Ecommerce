@@ -19,11 +19,13 @@
       <a href="<%= categories_path %>" class="navbar-item">
         Category
       </a>
+      <% if user_signed_in? %>
     <a href="<%= cart_path(current_user.id) %>" class="navbar-item">
         Cart
           <a href="<%= orders_path %>" class="navbar-item">
         Orders
       </a>
+      <%end%>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
