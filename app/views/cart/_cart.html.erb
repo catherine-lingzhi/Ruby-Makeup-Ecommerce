@@ -62,10 +62,9 @@
                 <p>Total Price: <%= number_to_currency(value) %></p>
             </div>
             <div class="column mx-100">
-                <%= form_with(url: orders_path, method: :post) do |form| %>
-  <%= form.button('Order All', type: 'submit', class: 'button is-success') %>
-<% end %>
-
+              <%= form_with(url: orders_path, method: :post) do |form| %>
+                <%= form.button('Order All', type: 'submit', class: 'button is-success') %>
+              <% end %>
             </div>
           </div>
         <% end %>
