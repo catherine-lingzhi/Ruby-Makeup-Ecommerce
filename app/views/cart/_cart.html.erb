@@ -48,10 +48,6 @@
                       <p class="title is-5">Price</p>
                       <p class="has-text-success has-text-weight-bold">$<%= item["product"].price %></p>
                     </div>
-                       <div class="column">
-                      <p class="title is-5">Subtotal</p>
-                      <p class="has-text-success has-text-weight-bold">$<%= item["subtotal"] %></p>
-                    </div>
                     <div class="column mt-6">
                       <%= link_to 'Remove', cart_path(item["product"]), 'data-turbo-method': :delete, class: 'button is-danger is-small' %>
                     </div>
@@ -66,7 +62,10 @@
                 <p>Total Price: <%= number_to_currency(value) %></p>
             </div>
             <div class="column mx-100">
-                <%= link_to 'Make an Order',  class: 'button is-danger is-small' %>
+                <%= form_with(url: orders_path, method: :post) do |form| %>
+  <%= form.button('Order All', type: 'submit', class: 'button is-success') %>
+<% end %>
+
             </div>
           </div>
         <% end %>

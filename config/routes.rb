@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   root "products#index"
-
+  resources :orders, only: [:create]
   resources :products, only: %i[index show] do
     collection do
       get "search", to: "products#search"
