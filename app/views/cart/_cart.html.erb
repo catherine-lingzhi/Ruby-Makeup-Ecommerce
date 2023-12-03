@@ -46,11 +46,11 @@
                     </div>
                     <div class="column">
                       <p class="title is-5">Price</p>
-                      <p class="has-text-success has-text-weight-bold">$<%= item["product"].price %></p>
+                      <p class="has-text-success has-text-weight-bold"><%= number_to_currency(item["product"].price) %></p>
                     </div>
                        <div class="column">
                       <p class="title is-5">Subtotal</p>
-                      <p class="has-text-success has-text-weight-bold">$<%= item["subtotal"] %></p>
+                      <p class="has-text-success has-text-weight-bold"><%= number_to_currency(item["subtotal"]) %></p>
                     </div>
                     <div class="column mt-6">
                       <%= link_to 'Remove', cart_path(item["product"]), 'data-turbo-method': :delete, class: 'button is-danger is-small' %>
