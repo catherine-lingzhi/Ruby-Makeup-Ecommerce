@@ -9,9 +9,9 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @orders = Order.create(order_status: 0, subtotal: 0, user_id: current_user.id)
+    @order = Order.create(order_status: 0, subtotal: 0, user_id: current_user.id)
     total_price = 0
-    if @orders.save
+    if @order.save
       Rails.logger.debug("Order saved successfully: #{@order.inspect}")
 
       gst = current_user.province&.GST || 0
@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
         quantity = item["quantity"]
         subtotal = product.price * quantity
         total_price += subtotal
-        @orders.order_details.create(
+        @order.order_details.create(
           quantity:,
           price:      product.price,
           product_id: product.id,
@@ -35,7 +35,8 @@ class OrdersController < ApplicationController
       @orders.update(subtotal: total_price)
       session[:shopping_cart] = nil
 
-      redirect_to orders_path(@orders.id), notice: "Order was successfully created."
+      Rails.logger.debug("Redirecting to order show page with ID: #{@order.id}")
+      redirect_to order_path(@order.id), notice: "Order was successfully created."
     else
       # Handle errors
     end

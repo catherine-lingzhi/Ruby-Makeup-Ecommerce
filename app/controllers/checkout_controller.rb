@@ -4,14 +4,6 @@ class CheckoutController < ApplicationController
   def create
     # Load up the product the user wishes to purchase from the product model:
 
-    product = Product.find(params[:product_id])
-
-    # DONT EVEN BOTHER CONTINUING IF SOMEONE IS MESSING WITH US
-    if product.nil?
-      redirect_to root_path
-      return
-    end
-
     # Establish a connection with Stripe and then redirect the user to the payment screen.
 
     # this call here, will have our server connect to stripe!
