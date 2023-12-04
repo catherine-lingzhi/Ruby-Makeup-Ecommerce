@@ -6,14 +6,14 @@ class CheckoutController < ApplicationController
     @order = Order.find(params[:order_id])
 
     # Establish a connection with Stripe and then redirect the user to the payment screen.
-    @session = Stripe::Checkout::Session.create(
+    @session = Stripe::Checkout::Session.create({
       payment_method_types: ["card"],
       mode:                 "payment",
       success_url:          checkout_success_url + "?session_id={CHECKOUT_SESSION_ID}",
       cancel_url:           checkout_cancel_url,
 
       line_items:           @order.line_items_for_stripe
-    )
+  })
 
     redirect_to @session.url, allow_other_host: true
   end
