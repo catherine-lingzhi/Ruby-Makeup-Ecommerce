@@ -1,4 +1,3 @@
-# app/controllers/orders_controller.rb
 class OrdersController < ApplicationController
   def index
     @orders = current_user.orders.all
@@ -11,35 +10,31 @@ class OrdersController < ApplicationController
   def create
     @order = Order.create(order_status: 0, subtotal: 0, user_id: current_user.id)
     total_price = 0
-    if @order.save
-      Rails.logger.debug("Order saved successfully: #{@order.inspect}")
+    return unless @order.save
 
-      gst = current_user.province&.GST || 0
-      pst = current_user.province&.PST || 0
-      hst = current_user.province&.HST || 0
-      qst = current_user.province&.QST || 0
-      tax = gst + pst + hst + qst
+    Rails.logger.debug("Order saved successfully: #{@order.inspect}")
 
-      session[:shopping_cart].each do |item|
-        product = Product.find_by(id: item["id"])
-        quantity = item["quantity"]
-        subtotal = product.price * quantity
-        total_price += subtotal
-        @order.order_details.create(
-          quantity:,
-          price:      product.price,
-          product_id: product.id,
-          tax:        product.price * (gst + pst + hst)
-        )
-      end
-      @orders.update(subtotal: total_price)
-      session[:shopping_cart] = nil
+    gst = current_user.province&.GST || 0
+    pst = current_user.province&.PST || 0
+    hst = current_user.province&.HST || 0
 
-      Rails.logger.debug("Redirecting to order show page with ID: #{@order.id}")
-      redirect_to order_path(@order.id), notice: "Order was successfully created."
-    else
-      # Handle errors
+    session[:shopping_cart].each do |item|
+      product = Product.find_by(id: item["id"])
+      quantity = item["quantity"]
+      subtotal = product.price * quantity
+      total_price += subtotal
+      @order.order_details.create(
+        quantity:,
+        price:      product.price,
+        product_id: product.id,
+        tax:        product.price * (gst + pst + hst)
+      )
     end
+    @orders.update(subtotal: total_price)
+    session[:shopping_cart] = nil
+
+    Rails.logger.debug("Redirecting to order show page with ID: #{@order.id}")
+    redirect_to order_path(@order.id), notice: "Order was successfully created."
   end
 
   def destroy

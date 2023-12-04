@@ -38,9 +38,9 @@
       </div>
       <div class="columns">
         <div class="column">
-         <p></p><strong>GST:</strong> <%= @order.gst %></p>
-          <p><strong>PST:</strong> <%= @order.pst %></p>
-          <p><strong>HST:</strong> <%= @order.hst %></p>
+         <p></p><strong>GST:</strong> <%= (@order.gst * @order.subtotal)%></p>
+          <p><strong>PST:</strong> <%= (@order.pst * @order.subtotal)%></p>
+          <p><strong>HST:</strong> <%= (@order.hst * @order.subtotal)%></p>
         </div>
       </div>
             <div class="columns">
