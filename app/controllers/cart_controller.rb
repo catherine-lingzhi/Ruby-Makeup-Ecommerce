@@ -35,7 +35,7 @@ class CartController < ApplicationController
     end
 
     # TODO: - Add notification ...
-    redirect_to root_path
+    redirect_to cart_path
   end
 
   # POST /cart/:id/update_quantity

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   root "products#index"
 
+  resources :orders
+
   resources :products, only: %i[index show] do
     collection do
       get "search", to: "products#search"
