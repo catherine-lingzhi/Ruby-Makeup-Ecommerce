@@ -1,0 +1,21 @@
+version: "3.3"
+services:
+  fullstackproject:
+    build: .
+    hostname: fullstackproject
+    depends_on:
+      - postgres
+    environment:
+      - "RAILS_ENV=production"
+      - "DATABASE_PASSWORD=${DATABASE_PASSWORD}"
+      - "SECRET_KEY_BASE=${SECRET_KEY_BASE}"
+    ports:
+      - "3000:3000"
+
+  postgres:
+    hostname: fullstackdockerdatabase
+    image: postgres
+    environment:
+      - "POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
+    ports:
+      - "5432:5432"
