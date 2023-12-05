@@ -19,7 +19,7 @@
             <td><%= number_to_currency(order.subtotal) %></td>
             <td><%= order.user.email %></td> <!-- Assuming there's a user association -->
             <td>
-              <%= link_to 'Show', order%>
+              <%= link_to 'Detail', order%>
               <%= link_to 'Delete', order_path(order.id), 'data-turbo-method': :delete%>
             </td>
           </tr>

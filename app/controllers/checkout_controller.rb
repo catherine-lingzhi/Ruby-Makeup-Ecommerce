@@ -3,7 +3,7 @@ class CheckoutController < ApplicationController
   # a product id will be in the params hash params[:product_id]
   def create
     # Load up the product the user wishes to purchase from the product model:
-    # product = Order.find(params:order_id).order_details
+    # product = Order.find(params: order_id).order_details
     # product = Product.find(params[:product_id])
 
     # DONT EVEN BOTHER CONTINUING IF SOMEONE IS MESSING WITH US

@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user
+  belongs_to :order_status
   has_many :order_details, dependent: :destroy
   has_one :province, through: :user
 
