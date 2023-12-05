@@ -19,13 +19,20 @@
       <a href="<%= categories_path %>" class="navbar-item">
         Category
       </a>
+    <!-- Assuming this is part of your navigation bar -->
+    <div class="navbar-start">
       <% if user_signed_in? %>
-    <a href="<%= cart_path(current_user.id) %>" class="navbar-item">
-        Cart
-          <a href="<%= orders_path %>" class="navbar-item">
-        Orders
-      </a>
-      <%end%>
+        <a href="<%= cart_path(current_user.id) %>" class="navbar-item">
+          Cart
+          <span class="tag is-primary">
+            <%= session[:shopping_cart].length %>
+          </span>
+        </a>
+        <a href="<%= orders_path %>" class="navbar-item">
+          Orders
+        </a>
+      <% end %>
+    </div>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">

@@ -75,4 +75,9 @@ group :test do
 
 end
 gem 'stripe'
+# Gemfile
+
 gem 'dotenv-rails', groups: [:development, :test]
+
+
+

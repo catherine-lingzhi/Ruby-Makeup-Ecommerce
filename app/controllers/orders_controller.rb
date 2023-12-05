@@ -17,8 +17,6 @@ class OrdersController < ApplicationController
       gst = current_user.province&.GST || 0
       pst = current_user.province&.PST || 0
       hst = current_user.province&.HST || 0
-      qst = current_user.province&.QST || 0
-      tax = gst + pst + hst + qst
 
       session[:shopping_cart].each do |item|
         product = Product.find_by(id: item["id"])

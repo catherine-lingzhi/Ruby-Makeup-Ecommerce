@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :order_details, dependent: :destroy
   has_one :province, through: :user
+  belongs_to :order_status
 
   def gst
     province&.GST || 0

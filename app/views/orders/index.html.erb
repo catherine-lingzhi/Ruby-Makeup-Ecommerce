@@ -15,7 +15,7 @@
         <% @orders.each do |order| %>
           <tr>
             <td><%= order.id %></td>
-            <td><%= order.order_status_id %></td>
+            <td><%= order.order_status.name %></td>
             <td><%= number_to_currency(order.subtotal) %></td>
             <td><%= order.user.email %></td> <!-- Assuming there's a user association -->
             <td>
