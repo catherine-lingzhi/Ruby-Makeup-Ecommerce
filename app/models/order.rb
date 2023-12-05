@@ -16,6 +16,14 @@ class Order < ApplicationRecord
     province&.HST || 0
   end
 
+  def save_payment_id(payment_id)
+    update(payment_id:)
+  end
+
+  def mark_as_paid
+    update(order_status: OrderStatus.find_by(id: 2))
+  end
+
   def line_items_for_stripe
     order_details.map do |order_detail|
       {

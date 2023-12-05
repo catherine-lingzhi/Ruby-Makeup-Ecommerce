@@ -1,13 +1,14 @@
-  <div class="container">
-    <h1 class="title is-2">Order Details</h1>
-    <% if @order.present? %>
+<div class="container">
+  <h1 class="title is-2">Order Invoice</h1>
+
+  <% if @order.present? %>
     <div class="columns is-multiline">
       <% @order.order_details.each do |order_detail| %>
         <div class="column is-full">
-            <div class="columns ">
-              <div class="column ">
+          <div class="columns">
+            <div class="column is-narrow">
               <% if order_detail.product.image.attached? %>
-                <%= image_tag rails_blob_path(order_detail.product.image, only_path: true), alt: order_detail.product.name, class: "image is-128x128 mb-3" %>
+                <%= image_tag rails_blob_path(order_detail.product.image, only_path: true), alt: order_detail.product.name, class: "image is-96x96 mb-3" %>
               <% else %>
                 <p>No Image</p>
               <% end %>
@@ -16,52 +17,56 @@
               <p class="title is-5"><%= order_detail.product.name %></p>
               <p class="mt-1 subtitle is-6 has-text-grey"><%= truncate(order_detail.product.description, length: 100) %></p>
             </div>
-            <div class="column">
+            <div class="column is-narrow">
               <p class="title is-5">Quantity</p>
               <p class="mt-1 subtitle is-6 has-text-grey"><%= order_detail.quantity %></p>
             </div>
-            <div class="column">
+            <div class="column is-narrow has-text-right">
               <p class="title is-5">Price</p>
               <p class="has-text-success has-text-weight-bold">$<%= order_detail.price %></p>
             </div>
+          </div>
         </div>
       <% end %>
-      <div class="columns">
-              <div class="column">
-          <p>Order Status: <%= @order.order_status.name%></p>
+
+      <div class="column is-full">
+        <div class="columns">
+          <div class="column has-text-right">
+            <p><strong>Order Status: </strong><%= @order.order_status.name %></p>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-right">
+            <p><strong>Subtotal: </strong><%= number_to_currency(@order.subtotal) %></p>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-right">
+            <p><strong>GST:</strong> <%= @order.gst %></p>
+            <p><strong>PST:</strong> <%= @order.pst %></p>
+            <p><strong>HST:</strong> <%= @order.hst %></p>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column has-text-right">
+            <p class="title is-4">Total: <%= number_to_currency((@order.subtotal) * (1 + @order.gst + @order.pst + @order.hst)) %></p>
+          </div>
         </div>
       </div>
-      <div class="columns">
+      <div class="columns is-justify-content-center">
         <div class="column">
-          <p>Subtotal: <%= number_to_currency(@order.subtotal) %></p>
+          <%= link_to 'Back to Orders', orders_path, class: 'button is-info' %>
         </div>
-      </div>
-      <div class="columns">
         <div class="column">
-         <p></p><strong>GST:</strong> <%= @order.gst %></p>
-          <p><strong>PST:</strong> <%= @order.pst %></p>
-          <p><strong>HST:</strong> <%= @order.hst %></p>
-        </div>
-      </div>
-            <div class="columns">
-        <div class="column">
-          <p>Total: <%= number_to_currency((@order.subtotal) * (1 + @order.gst + @order.pst + @order.hst)) %></p>
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column">
-          <%= link_to 'Back to Orders', orders_path %>
-        </div>
-         <div class="column">
-          <%= form_with data: {turbo:false}, url:checkout_create_path, remote: true do%>
-            <%= hidden_field_tag(:order_id, @order.id) %>
-            <%= button_tag '💳 Pay Now'%>
+          <% if @order.order_status.name == "new" %>
+            <%= form_with data: { turbo: false }, url: checkout_create_path, remote: true do %>
+              <%= hidden_field_tag(:order_id, @order.id) %>
+              <%= button_tag '💳 Pay Now', class: 'button is-success' %>
+            <% end %>
           <% end %>
         </div>
       </div>
-      </div>
-    <% else %>
-      <p class="subtitle is-6">Order not found.</p>
-    <% end %>
-  </div>
-
+  <% else %>
+    <p class="subtitle is-6">Order not found.</p>
+  <% end %>
+</div>

@@ -1,5 +1,17 @@
-<h1>
-  Yay! we have you money 💰
-  <%= debug @session %>
-  <%= debug @payment_intent %>
-</h1>
+ <section class="hero is-success is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="columns is-vcentered">
+          <div class="column is-8 is-offset-2">
+            <h1 class="title has-text-white">
+              Payment Successful
+            </h1>
+            <div class="notification is-light">
+              Thank you for your purchase. Your payment id:<%= @payment_intent.id %> was successful.
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

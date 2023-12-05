@@ -8,6 +8,7 @@ Product.delete_all
 Category.delete_all
 AdminUser.delete_all
 Province.delete_all
+OrderStatus.delete_all
 
 # Helper function to validate image link
 def valid_image_link?(image_link)
@@ -123,3 +124,7 @@ if Rails.env.development?
   AdminUser.create!(email: "admin@example.com", password: "password",
                     password_confirmation: "password")
 end
+
+OrderStatus.create(name: "new")
+OrderStatus.create(name: "Paid")
+OrderStatus.create(name: "Shipped")
