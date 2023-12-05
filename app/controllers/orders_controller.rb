@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
         tax:        product.price * (gst + pst + hst)
       )
     end
-    @orders.update(subtotal: total_price)
+    @order.update(subtotal: total_price)
     session[:shopping_cart] = nil
 
     Rails.logger.debug("Redirecting to order show page with ID: #{@order.id}")
