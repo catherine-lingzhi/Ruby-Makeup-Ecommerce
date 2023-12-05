@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.create(order_status: 0, subtotal: 0, user_id: current_user.id)
+    @order = Order.create(subtotal: 0, user_id: current_user.id)
     total_price = 0
     if @order.save
       Rails.logger.debug("Order saved successfully: #{@order.inspect}")
