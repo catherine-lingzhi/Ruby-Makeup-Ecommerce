@@ -49,6 +49,8 @@ class CartController < ApplicationController
 
     # Product is already in the cart, update the quantity
     existing_item["quantity"] = quantity
+
+    redirect_to cart_path
   end
 
   def show
