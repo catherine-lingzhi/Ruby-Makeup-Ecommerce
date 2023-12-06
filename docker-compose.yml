@@ -9,6 +9,9 @@ services:
       - "RAILS_ENV=production"
       - "DATABASE_PASSWORD=${DATABASE_PASSWORD}"
       - "SECRET_KEY_BASE=${SECRET_KEY_BASE}"
+      - "PUBLISHABLE_KEY=${PUBLISHABLE_KEY}"
+      - "SECRET_KEY=${SECRET_KEY}"
+      - "DATABASE_HOST=fullstackdockerdatabasej"
     ports:
       - "3000:3000"
 

@@ -24,7 +24,7 @@ production:
   adapter: postgresql
   encoding: unicode
   database: fullstackdockerdatabase
-  host: fullstackdockerdatabase
+  host: <%= ENV['DATABASE_HOST'] %>
   pool: 5
   username: postgres
   password: <%= ENV['DATABASE_PASSWORD'] %>
