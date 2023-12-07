@@ -21,7 +21,7 @@ class CartController < ApplicationController
                                    "quantity" => quantity }
     end
 
-    flash[:notice] = "+ #{quantity} #{product.name}(s) added to cart..."
+    flash[:notice] = "+ #{quantity} #{product.name}(s) added to cart...Check your Cart"
     redirect_to root_path
   end
 

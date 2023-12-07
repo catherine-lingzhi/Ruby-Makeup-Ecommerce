@@ -9,6 +9,9 @@
   <div class="is-flex is-justify-content-flex-end mb-5">
     <%= paginate @products %><br>
   </div>
+  <% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
   <div class="columns is-multiline">
     <% @products.each do |product| %>
       <div class="column is-one-third">

@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   has_many :order_details, dependent: :destroy
   has_one :province, through: :user
   belongs_to :order_status
+  validates :email, presence: true
 
   def gst
     province&.GST || 0
