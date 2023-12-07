@@ -1,6 +1,6 @@
 
   <div class="container">
-    <h1 class="title is-2">Order Details</h1>
+    <h1 class="title is-2">Orders</h1>
     <table>
       <thead>
         <tr>
@@ -15,7 +15,9 @@
         <% @orders.each do |order| %>
           <tr>
             <td><%= order.id %></td>
-            <td><%= order.order_status.name %></td>
+            <td class="has-text-danger is-uppercase">
+              <%= order.order_status.name %>
+            </td>
             <td><%= number_to_currency(order.subtotal) %></td>
             <td><%= order.user.email %></td> <!-- Assuming there's a user association -->
             <td>

@@ -22,7 +22,7 @@ class Order < ApplicationRecord
   end
 
   def mark_as_paid
-    update(order_status: OrderStatus.find_by(id: 2))
+    update(order_status: OrderStatus.find_by(name: "Paid"))
   end
 
   def line_items_for_stripe
