@@ -36,6 +36,7 @@ class OrdersController < ApplicationController
     session[:shopping_cart] = nil
 
     Rails.logger.debug("Redirecting to order show page with ID: #{@order.id}")
+    redirect_to order_path(@order.id)
   end
 
   def destroy

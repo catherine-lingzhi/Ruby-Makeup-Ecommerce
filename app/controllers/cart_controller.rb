@@ -47,14 +47,12 @@ class CartController < ApplicationController
 
     return unless existing_item
 
-    # Product is already in the cart, update the quantity
     existing_item["quantity"] = quantity
 
     redirect_to cart_path
   end
 
   def show
-    # Assign the shopping cart contents to an instance variable
     @cart = cart
   end
 end
