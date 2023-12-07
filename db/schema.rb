@@ -93,20 +93,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_05_182214) do
     t.index ["product_id"], name: "index_order_details_on_product_id"
   end
 
-  create_table "order_statuses", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "orders", force: :cascade do |t|
+    t.integer "order_status"
     t.decimal "subtotal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.integer "order_status_id", default: 1
     t.string "payment_id"
-    t.index ["order_status_id"], name: "index_orders_on_order_status_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -153,7 +146,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_05_182214) do
   add_foreign_key "carts", "users"
   add_foreign_key "order_details", "orders"
   add_foreign_key "order_details", "products"
-  add_foreign_key "orders", "order_statuses"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
 end
