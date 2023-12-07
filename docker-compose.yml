@@ -11,9 +11,9 @@ services:
       - "SECRET_KEY_BASE=${SECRET_KEY_BASE}"
       - "PUBLISHABLE_KEY=${PUBLISHABLE_KEY}"
       - "SECRET_KEY=${SECRET_KEY}"
-      - "DATABASE_HOST=fullstackdockerdatabasej"
+      - "DATABASE_HOST=fullstackdockerdatabase"
     ports:
-      - "3000:3000"
+      - "3001:3000"
 
   postgres:
     hostname: fullstackdockerdatabase
