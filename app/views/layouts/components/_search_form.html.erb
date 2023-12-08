@@ -3,13 +3,13 @@
     <div class="control is-flex is-align-items-center is-space-x-1">
       <div class="field has-addons">
         <div class="control is-relative">
-           <%= form.select :category_id, Category.all.collect { |c| [c.name, c.id] }, { include_blank: 'All' }, class: 'select is-border', style: ' margin-top: 6px; padding-top:3px;  height: 40px;' %>
+           <%= form.select :category_id, Category.all.collect { |c| [c.name, c.id] }, { include_blank: 'All' }, class: 'select is-border', style: ' margin-top: 10px; padding-top:3px;  height: 40px;' %>
 
         </div>
       </div>
       <%= form.text_field :keywords, class: "input is-transitioned is-fullwidth is-border is-hover:border-blue-500 margin-top", placeholder: 'Search for Products' %>
 
-     <%= form.submit "Search", class: "button is-primary is-p-2 is-hover:bg-blue-600 is-focus:outline-none is-focus:ring-2 is-focus:ring-blue-300 is-rounded", style: 'margin-top: 3px; height: 36px;' %>
+     <%= form.submit "Search", class: "button is-primary is-p-2 is-hover:bg-blue-600 is-focus:outline-none is-focus:ring-2 is-focus:ring-blue-300 ", style: 'margin-top: 8px; height: 40px;' %>
     </div>
   </div>
 <% end %>

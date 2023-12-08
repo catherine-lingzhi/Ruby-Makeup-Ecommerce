@@ -68,8 +68,8 @@
             <p>Hi, <%= current_user.email.split('@').first %>!</p>
             <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'ml-5 button is-danger' %>
           <% else %>
-            <%= button_to 'Sign Up', new_user_registration_path, method: :get, class: 'button is-success' %>
-            <%= button_to 'Login', new_user_session_path, method: :get, class: 'button is-info' %>
+            <%= button_to 'Sign Up', new_user_registration_path, method: :get, class: 'button is-info' %>
+            <%= button_to 'Login', new_user_session_path, method: :get, class: 'ml-3 button is-info' %>
           <% end %>
         </div>
       </div>
