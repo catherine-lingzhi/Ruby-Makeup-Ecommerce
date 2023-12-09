@@ -1,9 +1,12 @@
 class Order < ApplicationRecord
   belongs_to :user
   belongs_to :order_status
-  has_many :order_details, dependent: :destroy
+  has_many :order_details
+  has_many :products, through: :order_details
   has_one :province, through: :user
-  belongs_to :order_status
+  accepts_nested_attributes_for :order_details, allow_destroy: true
+
+  validates :subtotal, numericality: { greater_than_or_equal_to: 0 }
 
   def gst
     province&.GST || 0
