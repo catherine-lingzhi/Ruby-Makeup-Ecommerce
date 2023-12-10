@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
       total_price += subtotal
       @order.order_details.create(
         quantity:,
-        price:      product.price || 0,
+        price:      product.price,
         product_id: product.id,
         tax:        product.price * (gst + pst + hst)
       )

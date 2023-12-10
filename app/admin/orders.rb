@@ -6,7 +6,7 @@ ActiveAdmin.register Order do
   #
   # permit_params :subtotal, :user_id, :order_status_id, :payment_id, product_ids: []
   permit_params :subtotal, :user_id, :order_status_id, :payment_id, product_ids:              [],
-                                                                    order_details_attributes: %i[id quantity price product_id _destroy]
+                                                                    order_details_attributes: %i[id quantity product_id _destroy]
 
   form do |f|
     f.inputs "Order Details" do
