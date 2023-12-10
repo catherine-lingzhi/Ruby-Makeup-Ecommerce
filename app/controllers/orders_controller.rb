@@ -27,14 +27,14 @@ class OrdersController < ApplicationController
       total_price += subtotal
       @order.order_details.create(
         quantity:,
-        price:      product.price,
+        price:      product.price || 0,
         product_id: product.id,
         tax:        product.price * (gst + pst + hst)
       )
     end
     @order.update(subtotal: total_price)
     session[:shopping_cart] = nil
-
+    Rails.logger.debug("Validation Errors: #{@order.errors.full_messages}")
     Rails.logger.debug("Redirecting to order show page with ID: #{@order.id}")
     redirect_to order_path(@order.id)
   end

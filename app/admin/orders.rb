@@ -5,14 +5,13 @@ ActiveAdmin.register Order do
   # Uncomment all parameters which should be permitted for assignment
   #
   # permit_params :subtotal, :user_id, :order_status_id, :payment_id, product_ids: []
-  permit_params :subtotal, :user_id, :order_status_id, :subtotal, :payment_id, product_ids:   [],
-                                                                               order_details: %i[id quantity price product_id]
+  permit_params :subtotal, :user_id, :order_status_id, :payment_id, product_ids:              [],
+                                                                    order_details_attributes: %i[id quantity price product_id _destroy]
 
   form do |f|
     f.inputs "Order Details" do
-      f.object.order_details.build unless f.object.order_details.present?
-
-      f.has_many :order_details, allow_destroy: true do |od|
+      f.has_many :order_details, allow_destroy: true, heading: false,
+new_record: "Add Order Detail" do |od|
         od.input :quantity
         od.input :product_id, as: :select, collection: Product.all, include_blank: "Select Product"
         od.input :_destroy, as: :boolean, required: false, label: "Remove" if od.object.present?
