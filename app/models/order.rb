@@ -1,8 +1,12 @@
 class Order < ApplicationRecord
   belongs_to :user
-  has_many :order_details, dependent: :destroy
-  has_one :province, through: :user
   belongs_to :order_status
+  has_many :order_details, dependent: :destroy
+  has_many :products, through: :order_details
+  has_one :province, through: :user
+  accepts_nested_attributes_for :order_details, allow_destroy: true
+
+  validates :subtotal, numericality: { greater_than_or_equal_to: 0 }
 
   def gst
     province&.GST || 0
@@ -21,7 +25,7 @@ class Order < ApplicationRecord
   end
 
   def mark_as_paid
-    update(order_status: OrderStatus.find_by(id: 2))
+    update(order_status: OrderStatus.find_by(name: "Paid"))
   end
 
   def line_items_for_stripe

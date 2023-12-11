@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="title is-2">Order Invoice</h1>
+  <h1 class="title is-2">Order Details</h1>
 
   <% if @order.present? %>
     <div class="columns is-multiline">
@@ -23,7 +23,7 @@
             </div>
             <div class="column is-narrow has-text-right">
               <p class="title is-5">Price</p>
-              <p class="has-text-success has-text-weight-bold">$<%= order_detail.price %></p>
+              <p class="has-text-success has-text-weight-bold"><%= number_to_currency(order_detail.product.price) %></p>
             </div>
           </div>
         </div>
@@ -42,9 +42,9 @@
         </div>
         <div class="columns">
           <div class="column has-text-right">
-            <p><strong>GST:</strong> <%= @order.gst %></p>
-            <p><strong>PST:</strong> <%= @order.pst %></p>
-            <p><strong>HST:</strong> <%= @order.hst %></p>
+            <p><strong>GST:</strong> <%=number_to_currency(@order.gst) %></p>
+            <p><strong>PST:</strong> <%=number_to_currency(@order.pst) %></p>
+            <p><strong>HST:</strong> <%=number_to_currency(@order.hst) %></p>
           </div>
         </div>
         <div class="columns">

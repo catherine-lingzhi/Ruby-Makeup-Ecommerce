@@ -21,7 +21,7 @@ class CartController < ApplicationController
                                    "quantity" => quantity }
     end
 
-    flash[:notice] = "+ #{quantity} #{product.name}(s) added to cart..."
+    flash[:notice] = "+ #{quantity} #{product.name}(s) added to cart...Check your Cart"
     redirect_to root_path
   end
 
@@ -47,12 +47,12 @@ class CartController < ApplicationController
 
     return unless existing_item
 
-    # Product is already in the cart, update the quantity
     existing_item["quantity"] = quantity
+
+    redirect_to cart_path
   end
 
   def show
-    # Assign the shopping cart contents to an instance variable
     @cart = cart
   end
 end

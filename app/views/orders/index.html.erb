@@ -1,32 +1,30 @@
-
-  <div class="container">
-    <h1 class="title is-2">Order Details</h1>
-    <table>
-      <thead>
+<div class="container">
+  <h1 class="title is-2">Orders</h1>
+  <table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Status</th>
+        <th>Subtotal</th>
+        <th>User Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
         <tr>
-          <th>ID</th>
-          <th>Status</th>
-          <th>Subtotal</th>
-          <th>User Email</th>
-          <th>Action</th>
+          <td><%= order.id %></td>
+          <td class="has-text-danger is-uppercase">
+            <%= order.order_status.name %>
+          </td>
+          <td><%= number_to_currency(order.subtotal) %></td>
+          <td><%= order.user.email %></td>
+          <td>
+            <%= link_to 'Detail', order, class: 'button is-link is-small mr-2' %>
+            <%= link_to 'Delete', order_path(order.id), 'data-turbo-method': :delete, class: 'button is-danger is-small' %>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @orders.each do |order| %>
-          <tr>
-            <td><%= order.id %></td>
-            <td><%= order.order_status.name %></td>
-            <td><%= number_to_currency(order.subtotal) %></td>
-            <td><%= order.user.email %></td> <!-- Assuming there's a user association -->
-            <td>
-              <%= link_to 'Show', order%>
-              <%= link_to 'Delete', order_path(order.id), 'data-turbo-method': :delete%>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    </div>
-
-
-
+      <% end %>
+    </tbody>
+  </table>
+</div>

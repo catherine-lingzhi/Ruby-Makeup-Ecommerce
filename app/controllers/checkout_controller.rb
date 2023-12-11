@@ -1,4 +1,5 @@
 class CheckoutController < ApplicationController
+  include SendGrid
   # POST /checkout/create
   # a product id will be in the params hash params[:product_id]
   def create
@@ -26,6 +27,11 @@ class CheckoutController < ApplicationController
     @order = Order.find(session[:order_id])
 
     if @order
+      to_email = current_user.email
+      subject = "Payment Confirmation"
+      content = "We got you payment! We will delivery to you as soon as possioble!"
+      email_response = send_email(to_email, subject, content)
+
       @order.save_payment_id(@payment_intent.id)
       @order.mark_as_paid # Update the order status to "paid"
       session[:order_id] = nil
@@ -36,5 +42,18 @@ class CheckoutController < ApplicationController
 
   def cancel
     # Something went wrong with the payment :(
+  end
+
+  private
+
+  def send_email(to, subject, content)
+    from_email = Email.new(email: "lingzhiluo8@outlook.com")
+    to_email = Email.new(email: to)
+    mail = Mail.new(from_email, subject, to_email, Content.new(type: "text/plain", value: content))
+
+    sg = SendGrid::API.new(api_key: ENV["SENDGRID_API_KEY"])
+    response = sg.client.mail._("send").post(request_body: mail.to_json)
+
+    { status_code: response.status_code, body: response.body, headers: response.headers }
   end
 end

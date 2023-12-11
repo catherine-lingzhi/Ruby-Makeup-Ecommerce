@@ -19,20 +19,21 @@
       <a href="<%= categories_path %>" class="navbar-item">
         Category
       </a>
-    <!-- Assuming this is part of your navigation bar -->
-    <div class="navbar-start">
-      <% if user_signed_in? %>
-        <a href="<%= cart_path(current_user.id) %>" class="navbar-item">
-          Cart
-          <span class="tag is-primary">
-            <%= session[:shopping_cart].length %>
-          </span>
-        </a>
-        <a href="<%= orders_path %>" class="navbar-item">
-          Orders
-        </a>
-      <% end %>
-    </div>
+
+      <!-- Cart and Orders links -->
+      <div class="navbar-item">
+        <% if user_signed_in? %>
+          <a href="<%= cart_path(current_user.id) %>" class="navbar-item">
+            Cart
+            <span class="tag is-primary">
+              <%= session[:shopping_cart].length %>
+            </span>
+          </a>
+          <a href="<%= orders_path %>" class="navbar-item">
+            Orders
+          </a>
+        <% end %>
+      </div>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
@@ -63,16 +64,34 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-         <% if user_signed_in? %>
-         <p>Hi, <%= current_user.email.split('@').first %>!</p>
-          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'ml-5 button is-danger' %>
-
-        <% else %>
-          <%= button_to 'Sign Up', new_user_registration_path, method: :get, class: 'button is-success' %>
-          <%= button_to 'Login', new_user_session_path, method: :get, class: 'button is-info' %>
-        <% end %>
+          <% if user_signed_in? %>
+            <p>Hi, <%= current_user.email.split('@').first %>!</p>
+            <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'ml-5 button is-danger' %>
+          <% else %>
+            <%= button_to 'Sign Up', new_user_registration_path, method: :get, class: 'button is-info' %>
+            <%= button_to 'Login', new_user_session_path, method: :get, class: 'ml-3 button is-info' %>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Add the following code for mobile responsiveness -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+      if ($navbarBurgers.length > 0) {
+        $navbarBurgers.forEach(function ($el) {
+          $el.addEventListener('click', function () {
+            const target = $el.dataset.target;
+            const $target = document.getElementById(target);
+
+            $el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+          });
+        });
+      }
+    });
+  </script>
 </nav>
