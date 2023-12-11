@@ -4,6 +4,6 @@ class Product < ApplicationRecord
   has_many :orders, through: :order_details
   has_one_attached :image
 
-  validates :name, :price, presence: true
+  validates :name, :price, presence: true, numericality: true
   validates :price, presence: true, numericality: { greater_than: 0 }
 end
