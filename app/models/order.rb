@@ -29,7 +29,7 @@ class Order < ApplicationRecord
   end
 
   def line_items_for_stripe
-    order_details.map do |order_detail|
+    line_items = order_details.map do |order_detail|
       {
         price_data: {
           currency:     "cad",
@@ -37,10 +37,28 @@ class Order < ApplicationRecord
             name:        order_detail.product.name,
             description: order_detail.product.description
           },
-          unit_amount:  (order_detail.price * 100).to_i # Convert the price to cents
+          unit_amount:  (order_detail.price * 100).to_i
         },
         quantity:   order_detail.quantity
       }
     end
+
+    total_cents = (order_details.sum { |od| od.price * od.quantity } * 100).to_i
+    taxes_cents = (total_cents * (gst + pst + hst)).to_i
+    total_with_taxes_cents = total_cents + taxes_cents
+
+    line_items << {
+      price_data: {
+        currency:     "cad",
+        product_data: {
+          name:        "Taxes",
+          description: "GST, PST, HST"
+        },
+        unit_amount:  taxes_cents
+      },
+      quantity:   1
+    }
+
+    { line_items:, total: total_with_taxes_cents }
   end
 end
