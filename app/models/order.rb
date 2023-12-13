@@ -35,7 +35,7 @@ class Order < ApplicationRecord
           currency:     "cad",
           product_data: {
             name:        order_detail.product.name,
-            description: order_detail.product.description
+            description: (order_detail.product.description.presence || "No Description")
           },
           unit_amount:  (order_detail.price * 100).to_i
         },
